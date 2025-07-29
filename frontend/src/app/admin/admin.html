@@ -1,0 +1,72 @@
+<div class="d-flex align-items-center mb-3 w-75 mx-auto">
+    <h4 class="fw-bold mb-0 mx-auto" style="color: #00324d;">Admin Panel</h4>
+
+    <select class="form-select w-auto" [(ngModel)]="selectedStatus" (change)="filterByStatus()">
+        <option value="All">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+    </select>
+</div>
+
+<div class="w-100 bg-white rounded-xl shadow mx-auto p-3">
+    <table class="min-w-full text-sm text-left">
+        <thead class="bg-gray-100 text-gray-700" style="color: #00324d;">
+            <tr>
+                <th class="px-4 py-3">Leave type</th>
+                <th class="px-4 py-3">From</th>
+                <th class="px-4 py-3">To</th>
+                <th class="px-4 py-3">Days</th>
+                <th class="px-4 py-3">Reason</th>
+                <th class="px-4 py-3">Status</th>
+                <th class="px-4 py-3 text-center" style="min-width: 120px;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(leave of paginatedLeaves; track leave.id){
+            <tr class="border-t hover:bg-gray-50">
+                <td class="px-4 py-3">{{ leave.type }}</td>
+                <td class="px-4 py-3">{{ leave.from_date | date:'dd MMM yyyy' }}</td>
+                <td class="px-4 py-3">{{ leave.to_date | date:'dd MMM yyyy' }}</td>
+                <td class="px-4 py-3">{{ leave.days }}</td>
+                <td class="px-4 py-3">{{ leave.reason }}</td>
+                <td class="px-4 py-3">
+                    <span [ngClass]="getStatusClassName(leave.status)">{{ leave.status }}</span>
+                </td>
+
+
+                <td class="px-4 py-3">
+                    <div class="d-flex gap-3" style="cursor: pointer;">
+                        @if(leave.status === "Pending") {
+                        <a class="text-decoration-none me-2" title="Approve" (click)="approveLeave(leave)">
+                            <i class="fa-regular fa-circle-check text-success fs-5"></i>
+                        </a>
+                        <a class="text-decoration-none" title="Reject" (click)="rejectLeave(leave)">
+                            <i class="fa-regular fa-circle-xmark text-danger fs-5"></i>
+                        </a>
+                        }
+
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- pagination -->
+    <div class="d-flex justify-content-end align-items-center gap-2 mt-4 w-full">
+        <button class="py-1 px-2 border-0 bg-white" (click)="changePage(currentPage - 1)"
+            [disabled]="currentPage === 1">
+            <i class="fa-solid fa-angle-left"></i>
+        </button>
+
+        <span>{{ currentPage }}</span>
+
+        <button class="py-1 px-2 border-0 bg-white" (click)="changePage(currentPage + 1)"
+            [disabled]="currentPage === totalPages">
+            <i class="fa-solid fa-angle-right"></i>
+        </button>
+    </div>
+
+
+</div>

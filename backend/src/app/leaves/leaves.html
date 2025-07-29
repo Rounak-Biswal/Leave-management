@@ -1,0 +1,16 @@
+<div class="demo-txt">
+    ..let's go...why're my leaves ???
+</div>
+
+<div class="container">
+    <ul>
+        @for(leave of allLeaveData; track $index){
+        <li>{{leave.type}}</li>
+        <li>{{leave.from_date}}</li>
+        <li>{{leave.to_date}}</li>
+        <li>{{leave.days}}</li>
+        <li>{{leave.status}}</li>
+        <li>{{leave.reason}}</li>
+        }
+    </ul>
+</div>

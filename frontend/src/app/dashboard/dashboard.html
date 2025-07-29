@@ -1,0 +1,17 @@
+<div class="d-flex flex-wrap gap-3">
+    @for(widget of widgets; track $index){
+    <app-stat-widget [count]="widget.count" [label]="widget.label" [bg]="widget.bg" />
+    }
+</div><br><br>
+
+<div class="card shadow-sm p-4 mb-4 w-full">
+    <h5 class="fw-semibold mb-4" style="color: #00324d;">Leave Statistics</h5>
+
+    <div style="height: 200px; width: 100%;">
+        <ngx-charts-bar-horizontal [results]="chartData" [scheme]="colorScheme" [barPadding]="10" [roundEdges]="true"
+            [xAxis]="true" [yAxis]="true" [animations]="true" [view]="[600, 200]">
+        </ngx-charts-bar-horizontal>
+    </div>
+</div>
+
+<app-reminder [reminders]="reminders"></app-reminder>

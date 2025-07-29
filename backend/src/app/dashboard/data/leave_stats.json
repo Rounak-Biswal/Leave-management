@@ -1,0 +1,8 @@
+[
+  { "name": "Casual", "value": 17 },
+  { "name": "Sick", "value": 11 },
+  { "name": "Paid", "value": 13 },
+  { "name": "Paternity", "value": 1 },
+  { "name": "Unpaid", "value": 30 },
+  { "name": "Compensatory", "value": 30 }
+]

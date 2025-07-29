@@ -1,0 +1,5 @@
+[
+  { "count": 10, "label": "Approved Leaves", "bg": "bg-success-subtle" },
+  { "count": 2, "label": "Pending Leaves", "bg": "bg-warning-subtle" },
+  { "count": 5, "label": "Rejected Leaves", "bg": "bg-danger-subtle" }
+]

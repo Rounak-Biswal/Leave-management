@@ -1,0 +1,17 @@
+# Node / Angular
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Python
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# IDEs
+**/.idea/
+**/.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
