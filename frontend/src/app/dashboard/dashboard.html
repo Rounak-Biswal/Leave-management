@@ -2,6 +2,9 @@
     @for(widget of widgets; track $index){
     <app-stat-widget [count]="widget.count" [label]="widget.label" [bg]="widget.bg" />
     }
+
+    <button [ngClass]="btnStyle" (click)="clicked()" id="testingBtn">{{ btnText }}</button>
+
 </div><br><br>
 
 <div class="card shadow-sm p-4 mb-4 w-full">

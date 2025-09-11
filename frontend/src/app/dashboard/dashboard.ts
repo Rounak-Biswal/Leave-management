@@ -134,4 +134,12 @@ export class Dashboard implements OnInit {
 
     console.log("Reminders : ", this.reminders)
   }
+
+  //selenium testing
+  btnStyle = "btn btn-primary"
+  btnText = "Click here !!"
+  clicked() {
+    this.btnStyle = "btn btn-danger"
+    this.btnText = "Nice, see u later !!"
+  }
 }
