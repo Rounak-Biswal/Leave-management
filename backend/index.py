@@ -19,6 +19,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/Static", StaticFiles(directory="Static"), name="Static")
-templates = Jinja2Templates(directory="templates")
+# app.mount("/Static", StaticFiles(directory="Static"), name="Static")
+templates = Jinja2Templates(directory="Templates")
 app.include_router(leave)
