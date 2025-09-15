@@ -10,11 +10,12 @@ app = FastAPI()
 # Allow your frontend origin here
 origins = [
     "http://localhost:4200",  # Angular dev server
+    "https://leave-management-39pw.vercel.app",  # your vercel frontend
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # or ["*"] for all
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
