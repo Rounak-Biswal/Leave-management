@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ILeave, LeaveForm } from '../../models/Leave.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LEAVE_FORM_CONFIG } from './leave-form.config';
+import { prodAPI } from '../../api/routes.prod';
 
 @Component({
   selector: 'app-new-leave',
@@ -45,7 +46,7 @@ export class NewLeave implements OnInit {
     let days = (to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24) + 1;
     this.newLeave.days = days;
 
-    this.http.post("http://127.0.0.1:8000/leave/apply", this.newLeave)
+    this.http.post(`${prodAPI.oneLeave}apply`, this.newLeave)
       .subscribe(() => {
         this.successMessage = "🎉 Leave successfully submitted!";
 

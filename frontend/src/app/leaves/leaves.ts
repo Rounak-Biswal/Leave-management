@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { ILeave } from '../../models/Leave.model';
+import { localAPI } from '../../api/routes.local';
+import { prodAPI } from '../../api/routes.prod';
 
 @Component({
   selector: 'app-leaves',
@@ -18,7 +20,7 @@ export class Leaves implements OnInit {
   }
 
   getLeaves() {
-    this.http.get("http://127.0.0.1:8000/leave/all").subscribe((res: any) => {
+    this.http.get(`${prodAPI.allLeaves}`).subscribe((res: any) => {
       this.allLeaveData = res
     })
   }

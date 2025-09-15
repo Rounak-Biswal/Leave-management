@@ -7,6 +7,9 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ILeave, ILeaveWithDaysLeft } from '../../models/Leave.model';
 import { Reminder } from '../reminder/reminder';
+import { localAPI } from '../../api/routes.local';
+import { prodAPI } from '../../api/routes.prod';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -67,7 +70,7 @@ export class Dashboard implements OnInit {
   }
 
   getAllData() {
-    this.http.get("http://127.0.0.1:8000/leave/all")
+    this.http.get(`${prodAPI.allLeaves}`)
       .subscribe((res: any) => {
         this.allLeaveData = res;
         this.getReminders()
@@ -75,7 +78,7 @@ export class Dashboard implements OnInit {
   }
 
   getLeaveSummary() {
-    this.http.get("http://127.0.0.1:8000/leave/all")
+    this.http.get(`${prodAPI.allLeaves}`)
       .subscribe((res: any) => {
         this.allLeaveDataForWidgets = res
 
@@ -94,7 +97,7 @@ export class Dashboard implements OnInit {
   }
 
   getChartSummary() {
-    this.http.get("http://127.0.0.1:8000/leave/all")
+    this.http.get(`${prodAPI.allLeaves}`)
       .subscribe((res: any) => {
         this.allLeaveDataForChart = res
 

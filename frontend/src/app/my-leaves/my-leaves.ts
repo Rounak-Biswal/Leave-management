@@ -4,6 +4,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { IEditLeaveForm, ILeave } from '../../models/Leave.model';
 import { FormsModule } from "@angular/forms";
 import { EDIT_LEAVE_FORM_CONFIG } from './edit-leave-form.config';
+import { localAPI} from '../../api/routes.local';
+import { prodAPI } from "../../api/routes.prod";
+
 
 @Component({
   selector: 'app-my-leaves',
@@ -43,7 +46,7 @@ export class MyLeaves implements OnInit {
 
   //api
   // getLeaves() {
-  //   this.http.get("http://127.0.0.1:8000/leave/all")
+  //   this.http.get(`${prodAPI.allLeaves}`)
   //     .subscribe((res: any) => {
   //       this.allLeaveData = res
   //       this.totalPages = Math.ceil(this.allLeaveData.length / this.itemsPerPage)
@@ -53,7 +56,7 @@ export class MyLeaves implements OnInit {
 
   //filter function
   getLeaves() {
-    this.http.get("http://127.0.0.1:8000/leave/all").subscribe((res: any) => {
+    this.http.get(`${prodAPI.allLeaves}`).subscribe((res: any) => {
       this.allLeaveData = res;
       this.filterByStatus(); // Apply filtering + pagination
     });
@@ -75,14 +78,14 @@ export class MyLeaves implements OnInit {
 
   id: string = "688540c565661e8177eec4ac"
   showLeave(id: string) {
-    this.http.get(`http://127.0.0.1:8000/leave/${id}`)
+    this.http.get(`${prodAPI.oneLeave}${id}`)
       .subscribe((res: any) => {
         this.currLeave = res;
       })
   }
 
   deleteLeave(id: string) {
-    this.http.delete(`http://127.0.0.1:8000/leave/${id}/delete`)
+    this.http.delete(`${prodAPI.oneLeave}${id}/delete`)
       .subscribe((res: any) => {
         this.getLeaves()
         this.closeBtn()
@@ -102,7 +105,7 @@ export class MyLeaves implements OnInit {
       let days = to.getTime() - from.getTime()    //return milliseconds
       this.editLeave.days = (days / (1000 * 60 * 60 * 24)) + 1   //convert ms -> day
     }
-    this.http.put(`http://127.0.0.1:8000/leave/${id}/update`, this.editLeave)
+    this.http.put(`${prodAPI.oneLeave}${id}/update`, this.editLeave)
       .subscribe((res: any) => {
         this.getLeaves()
         this.closeBtn()
@@ -146,7 +149,7 @@ export class MyLeaves implements OnInit {
 
   //modal delete confirmation
   askConfirmation(id: string) {
-    this.http.get(`http://127.0.0.1:8000/leave/${id}`)
+    this.http.get(`${prodAPI.oneLeave}${id}`)
       .subscribe((res: any) => {
         this.dltConfirm = res;
       })
@@ -154,7 +157,7 @@ export class MyLeaves implements OnInit {
 
   //modal edit form
   showEditForm(id: string) {
-    this.http.get(`http://127.0.0.1:8000/leave/${id}`)
+    this.http.get(`${prodAPI.oneLeave}${id}`)
       .subscribe((res: any) => {
         const formatDate = (dateStr: string) => {
           const d = new Date(dateStr);

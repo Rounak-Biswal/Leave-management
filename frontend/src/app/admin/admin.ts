@@ -3,7 +3,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ILeave } from '../../models/Leave.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { concat } from 'rxjs';
+import { localAPI} from '../../api/routes.local';
+import { prodAPI } from '../../api/routes.prod';
 
 @Component({
   selector: 'app-admin',
@@ -36,7 +37,7 @@ export class Admin implements OnInit {
   //api
   //get all leaves
   getLeavesForAdmin() {
-    this.http.get("http://127.0.0.1:8000/leave/all")
+    this.http.get(`${prodAPI.allLeaves}`)
       .subscribe((res: any) => {
         this.allLeaveData = res;
         let pending = this.allLeaveData.filter((leave) => leave.status === "Pending")
@@ -48,7 +49,7 @@ export class Admin implements OnInit {
   }
   //save leave record into variable
   getLeaveData(id: string) {
-    this.http.get(`http://127.0.0.1:8000/leave/${id}`)
+    this.http.get(`${prodAPI.oneLeave}${id}`)
       .subscribe((res: any) => {
         this.currLeave = res;
       })
@@ -56,7 +57,7 @@ export class Admin implements OnInit {
   //approve leave
   approveLeave(leave: ILeave) {
     leave.status = "Approved"
-    this.http.put(`http://127.0.0.1:8000/leave/${leave.id}/update`, leave)
+    this.http.put(`${prodAPI.oneLeave}${leave.id}/update`, leave)
       .subscribe((res) => {
         this.getLeavesForAdmin()
       })
@@ -65,7 +66,7 @@ export class Admin implements OnInit {
   //reject leave
   rejectLeave(leave: ILeave) {
     leave.status = "Rejected"
-    this.http.put(`http://127.0.0.1:8000/leave/${leave.id}/update`, leave)
+    this.http.put(`${prodAPI.oneLeave}${leave.id}/update`, leave)
       .subscribe((res) => {
         this.getLeavesForAdmin()
       })
